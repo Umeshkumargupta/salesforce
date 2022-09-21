@@ -1,0 +1,34 @@
+{% extends 'index.html' %}
+{% block content %}
+
+<div class="container">
+    <h1>Route View</h1>
+    {% include '_messages.html' %}
+    <table class="table tbale-sm">
+        <thead>
+            <th>ROUTE ID</th>
+            <th>ROUTE NAME</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </thead>
+        <tbody>
+          {% for i in routesetupdata %}
+          <tr>
+    
+            
+            <td>{{i.ROUTE_ID}}</td>
+            <td>{{i.ROUTE_NAME}}</td>
+        
+            <td> <a href="" class="btn btn-sm btn-info">Edit </a> </td>
+            <td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal">
+              Delete
+            </button></td>
+          </tr>
+
+ 
+
+          {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

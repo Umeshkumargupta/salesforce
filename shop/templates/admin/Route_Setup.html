@@ -1,0 +1,57 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="text-center bg-info p-2 h4">Outlet Setup</div>
+                {% from "_formhelpers.html" import render_field %}
+                <form method=post>
+                    {{ form.csrf_token }}
+                <div>
+                    {{ render_field(form.Name, class="form-control") }}
+                    {{ render_field(form.Description, class="form-control") }}
+                    
+                    
+                </div>
+                <p><input type="submit" value="Register" class="btn-info">
+                </form>
+            </div>
+      <div class="col-md-3"></div>
+    </div>
+ 
+</div>
+<div class="container">
+    <h1>Route View</h1>
+    {% include '_messages.html' %}
+    <table class="table tbale-sm">
+        <thead>
+            <th>ROUTE ID</th>
+            <th>ROUTE NAME</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </thead>
+        <tbody>
+          {% for i in routesetupdata %}
+          <tr>
+    
+            
+            <td>{{i.ROUTE_ID}}</td>
+            <td>{{i.ROUTE_NAME}}</td>
+        
+            <td> <a href="" class="btn btn-sm btn-info">Edit </a> </td>
+            <td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal">
+              Delete
+            </button></td>
+          </tr>
+
+ 
+
+          {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content%}
+
