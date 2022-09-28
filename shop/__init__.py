@@ -21,4 +21,5 @@ bcrypt = Bcrypt(app)
 
 
 from shop.admin import routes
+from shop.order import routes
 

@@ -1,0 +1,44 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="text-center bg-info p-2 h4">Visit Entry</div>
+                {% from "_formhelpers.html" import render_field %}
+                <form method=post>
+                    {{ form.csrf_token }}
+                    <div>
+                        {{ render_field(form.Visit_date, class="form-control") }}
+                        {{ render_field(form.Works, class="form-control") }}
+                        {{ render_field(form.Remarks, class="form-control") }}
+                        {{ render_field(form.Available_qty, class="form-control") }}
+
+                       
+                        <!-- <label for="Route">Select Route</label>
+                        <select name="route" id="route" class="form-control" required>
+                            <option value="">Select Route</option>
+                            {% for Routes in Route%}
+                            <option value="{{Routes.ROUTE_ID}}">{{Routes.ROUTE_NAME}}</option>
+                            {% endfor %}
+                        </select>
+                        {{ render_field(form.pan_image, class="form-control") }}
+                        {{ render_field(form.Profile_Image, class="form-control") }} 
+                        <label for="Out_cat">Select Outlet Category</label>
+                        <select name="Outlet_cat" id="Outlet_cat" class="form-control" required>
+                            <option value="">Select Outlet Category</option>
+                            {% for Out_cats in Out_cat %}
+                            <option value="{{Out_cats.OUTLET_CAT_ID}}">{{Out_cats.OUTLET_CAT_NAME}}</option>
+                            {% endfor %}
+                        </select> -->
+                            </div>
+                <p><input type="submit" value="Save" class="btn-info">
+                </form>
+            </div>
+      <div class="col-md-3"></div>
+    </div>
+</div>
+{% endblock content%}
+
+
+

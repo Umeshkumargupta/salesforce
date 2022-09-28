@@ -1,0 +1,200 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div class="container">
+    {% from "_formhelpers.html" import render_field %}
+    <form method="post">
+      {{ form.csrf_token }}
+      <button type="button" class="btn btn-primary">
+        Add Voucher
+       </button>
+       <button type="button" class="btn btn-primary">
+        Save
+       </button>
+    <div class="row g-6">
+        <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Doc No</label>
+            <input type="text" name="v_no" class="form-control form-control-sm">
+
+        </div>
+        <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Doc Date/Miti</label>
+          <input type="date" name="v_date" class="form-control form-control-sm">
+        </div>
+        <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Deleivery Date/Miti</label>
+            <input type="date" name="deleivery_date"class="form-control form-control-sm">
+          </div>
+          
+    </div>
+    <hr>
+    <div class="row g-3">
+        <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Dealer</label>
+            <select name="Dealer" id="Dealer"  class="form-select form-select-sm" aria-label=".form-select-sm example">
+                <option selected>Select Dealer</option>
+                {% for Dealers in Dealer %}
+                <option value="{{Dealers.DEALER_CODE}}">{{Dealers.DEALER_NAME}}</option>
+                {% endfor %}
+              </select>
+        </div>
+        <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Area</label>
+            <select name="Area"class="form-select form-select-sm" aria-label=".form-select-sm example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+        </div>
+        <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Priority</label>
+            <select name="Priority"class="form-select form-select-sm" aria-label=".form-select-sm example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+          </div>
+      </div>
+      <hr>
+      <div class="row g-3">
+        <div class="col">
+            <label for="formGroupExampleInput" class="form-label">M/s Customer</label>
+            <select name="Customer" id="Customer"class="form-select form-select-sm" aria-label=".form-select-sm example">
+              <option selected>Select Customer</option>
+              {% for Customers in Customer %}
+              <option value="{{Customers.CUS_CODE}}">{{Customers.CUS_NAME}}</option>
+              {% endfor %}
+            </select>
+        </div>
+        <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Shipping Address</label>
+            <select name="Shipping_Address"class="form-select form-select-sm" aria-label=".form-select-sm example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+        </div>
+        <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Sales Class</label>
+            <select name="Sale_Class" id="Sale_Class"class="form-select form-select-sm" aria-label=".form-select-sm example">
+              <option selected>Select Sale Class</option>
+              {% for Sd in Sale_Class %}
+              <option value="{{Sd.SD_TYPE_CODE}}">{{Sd.SD_TYPE_NAME}}</option>
+              {% endfor %}
+            </select>
+          </div>
+      </div>
+      <hr>
+      <div class="row g-3">
+        <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Payment Mode</label>
+            <select name="payment_mode" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+        </div>
+        <div class="col">
+            {{ render_field(form.Product_discount, class="form-control") }}
+        </div>
+        <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Shipping Contact</label>
+            <input type="text" name="Shipping_contact"class="form-control form-control-sm">
+          </div>
+      </div>
+      <div class="col">
+        <label for="formGroupExampleInput" class="form-label">Remarks</label>
+        <input type="text" name="Remarks" class="form-control form-control-sm">
+    </div>
+    <div class="row g-8">
+      <div class="col">
+        <label for="formGroupExampleInput" class="form-label">Product</label>
+        <select name="it" id="it"class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="getNewVal(this);">
+          <option selected>Select Item</option>
+          {% for icode in it %}
+          <option value="{{icode.IT_CODE}}">{{icode.IT_NAME}}|{{icode.KEY_UNIT}}</option>
+          {% endfor %}
+        </select>
+    </div>
+        <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Unit      </label>
+            <input type="text" name="unit" id="unit" class="form-control form-control-sm">
+        </div>
+       
+          <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Quantity</label>
+            <input type="text" class="form-control form-control-sm" id="qty" onchange="total(this);"  >
+          </div>
+          <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Price/Unit</label>
+            <input type="text" class="form-control form-control-sm" id="rate" onchange="total(this);">
+          </div>
+          <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Value</label>
+            <input type="text" class="form-control form-control-sm"id="amt">
+          </div>
+          <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Net Value</label>
+            <input type="text" class="form-control form-control-sm" id="netamt">
+           
+          </div>
+          <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Action</label>
+            
+            <button type="button"class="form-control form-control-sm" name="add" id="AddMoreFileBox" class="btn btn-success" onclick="createSelect()">Add More</button>
+          </div>
+        </div>
+    <hr>
+    <input type="submit" value="Save" class="btn-info">
+    </form>
+
+  
+
+    </div>
+  </div>
+    </div>
+      
+<script>
+  function getNewVal(item)
+{
+
+
+    var unit = item.value;
+
+      document.getElementById("unit").value = unit;
+
+}
+function total(amt)
+{
+
+  var qty = Number(document.getElementById('qty').value);
+  var rate = Number(document.getElementById('rate').value);
+  //var rate = amt.value;
+  var total = qty*rate;
+
+      document.getElementById("amt").value = total;
+      document.getElementById("netamt").value = total;
+
+}
+function createSelect() {
+  var select = document.createElement("SELECT");
+  select.setAttribute("id", "mySelect");
+  document.body.appendChild(select);
+
+  var items = ["Foo","Bar","Zoo"];
+  for(var i = 0;i<items.length;i++) {
+    var item = items[i];
+    var newOption = document.createElement("option");
+    newOption.setAttribute("value", item);
+    var textNode = document.createTextNode(item);
+    newOption.appendChild(textNode);
+    select.appendChild(newOption);
+  }
+}
+</script>
+{% endblock content%}
+

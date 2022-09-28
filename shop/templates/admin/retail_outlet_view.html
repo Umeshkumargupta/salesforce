@@ -1,0 +1,129 @@
+{% extends 'index.html' %}
+{% block content %}
+
+<div class="container">
+  <div class="table-responsive">
+    <h1>Retail Layout View</h1>
+    <div> <a href="/Retail_outlet_creation"><button type="button" class="btn btn-primary">Create Retail</button></div></a>
+    {% include '_messages.html' %}
+    <table class="table tbale-sm">
+        <thead>
+            <th>RETAIL ID</th>
+            <th>NAME</th>
+            <th>PAN</th>
+            <th>ADDRESS</th>
+            <th>MOBILE</th>
+            <th>TELEPHONE</th>
+            <th>CONTACT PERSON</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </thead>
+        <tbody>
+          {% for i in retail_layout_view %}
+          <tr>
+    
+            
+            <td>{{i.RETAIL_ID}}</td>
+            <td>{{i.RETAIL_NAME}}</td>
+            <td>{{i.PAN_NO}}</td>
+            <td>{{i.ADDRESS}}</td>
+            <td>{{i.MONLI_NO}}</td>
+            <td>{{i.TEL_NO}}</td>
+            <td>{{i.CONATACT_PERSON}}</td>
+
+            <td> <a href="" class="btn btn-sm btn-info">Edit </a> </td>
+            <td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal">
+              Delete
+            </button></td>
+          </tr>
+
+ 
+
+          {% endfor %}
+        </tbody>
+    </table>
+  </div>
+
+
+
+
+      <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Add Product
+   </button>
+   
+   <!-- Modal -->
+   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+     <div class="modal-dialog modal-xl">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+          <form name="add_skills" id="add_skills>
+           
+           <div id="InputsWrapper">
+             <div class="row g-8">
+             
+                 <div class="col">
+                     <label for="formGroupExampleInput" class="form-label">Unit      </label>
+                     <input type="text" class="form-control form-control-sm">
+                 </div>
+                 <div class="col">
+                     <label for="formGroupExampleInput" class="form-label">Ctn/Bag</label>
+                     <input type="text" class="form-control form-control-sm">
+                   </div>
+                   <div class="col">
+                     <label for="formGroupExampleInput" class="form-label">Quantity</label>
+                     <input type="text" class="form-control form-control-sm">
+                   </div>
+                   <div class="col">
+                     <label for="formGroupExampleInput" class="form-label">Price/Unit</label>
+                     <input type="text" class="form-control form-control-sm">
+                   </div>
+                   <div class="col">
+                     <label for="formGroupExampleInput" class="form-label">Value</label>
+                     <input type="text" class="form-control form-control-sm">
+                   </div>
+                   <div class="col">
+                     <label for="formGroupExampleInput" class="form-label">Net Value</label>
+                     <input type="text" class="form-control form-control-sm">
+                    
+                   </div>
+                   <div class="col">
+                     <label for="formGroupExampleInput" class="form-label">Action</label>
+                     
+                     <button type="button"class="form-control form-control-sm" name="add" id="AddMoreFileBox" class="btn btn-success">Add More</button>
+                   </div>
+                 </div>
+                   
+               </div>
+             
+               <div class="container">  
+                 <br />  
+                 <br />  
+                 <h2 align="center">Add product</h2><div id="resultbox"></div>  
+                 <div class="form-group">  
+                      <form name="add_skills" id="add_skills">  
+                                     <div id="InputsWrapper">
+                                      
+                                          <div class="col-xs-6"><input type="text" name="skill[]" placeholder="Enter your skill" class="form-control name_list" /></div>
+                                          <div class="col-xs-6"><button type="button" name="add" id="AddMoreFileBox" class="btn btn-success">Add More</button></div>
+            </div>
+           </div>
+           <br/>
+                                <input type="button" name="submit" id="submit" class="btn btn-info" value="Submit" />  
+                      </form>  
+                 </div>  
+            </div>
+          </form>
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+           <button type="button" class="btn btn-primary">Add in Grid</button>
+         </div>
+       </div>
+
+
+{% endblock content %}

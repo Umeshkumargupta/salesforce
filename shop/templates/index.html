@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Power Brain ERP</title>
+    <title>PB CRM</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -29,6 +29,7 @@
 
     <!-- Template Stylesheet -->
     <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
 </head>
 
 <body>
@@ -46,7 +47,7 @@
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-light navbar-light">
                 <a href="index.html" class="navbar-brand mx-4 mb-3">
-                    <h5 class="text-primary">POWER BRAINS ERP</h5>
+                    <h5 class="text-primary">PB CRM</h5>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
@@ -74,11 +75,13 @@
 					    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>OPERATION</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="#" class="dropdown-item">Visit</a>
-                            <a href="#" class="dropdown-item">Sales Order</a>
+                            <a href="Retail_layout_view" class="dropdown-item">Retail Creation</a>
+                            <a href="Sales_Order" class="dropdown-item">Sales Order</a>
                             <a href="#" class="dropdown-item">Collections</a>
 							<a href="#" class="dropdown-item">Sales Operation</a>
 							<a href="#" class="dropdown-item">Complain</a>
-							<form> <input type=text></form>
+                            <a href="Salesordertest" class="dropdown-item">Test so</a>
+							
                         </div>
                     </div>
                     <a href="#" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Reports</a>

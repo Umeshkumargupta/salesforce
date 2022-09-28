@@ -1,0 +1,250 @@
+{% extends "index.html" %}
+{% block content %}
+<script>
+  $(document).ready(function() {
+    
+  var MaxInputs       = 20; //maximum input boxes allowed
+  var InputsWrapper   = $("#InputsWrapper"); //Input boxes wrapper ID
+  var AddButton       = $("#AddMoreFileBox"); //Add button ID
+    
+  var x = InputsWrapper.length; //initlal text box count
+  var FieldCount=1; //to keep track of text box added
+    
+  $(AddButton).click(function (e)  //on add input button click
+  {
+          if(x <= MaxInputs) //max input box allowed
+          {
+              FieldCount++; //text box added increment
+              //add input box
+              $(InputsWrapper).append('<div class="row"><p class="col-xs-6"><input type="text" placeholder="Enter your skill" class="form-control skill_list" name="skill[]" id="field_'+ FieldCount +'" value="Enter your skill '+ FieldCount +'"/></p><a href="#" class="btn btn-danger removeclass">×</a></div>');
+              
+              x++; //text box increment
+          }
+  return false;
+  });
+    
+  $("body").on("click",".removeclass", function(e){ //user click on remove text
+          if( x > 1 ) {
+                  $(this).parent('div').remove(); //remove text box
+                  x--; //decrement textbox
+          }
+  return false;
+  })
+   $('#submit').click(function(){            
+             $.ajax({  
+                  url:"/postskill",  
+                  method:"POST",  
+                  data:$('#add_skills').serialize(),  
+                  success:function(data)  
+                  {  alert(data)
+                       $('#resultbox').html(data);  
+                       $('#add_skills')[0].reset();  
+                  }  
+             });  
+        }); 
+  });
+  </script>
+<div class="container">
+    <form method="post">
+      {{ form.csrf_token }}
+      <button type="button" class="btn btn-primary">
+        Add Voucher
+       </button>
+       <button type="button" class="btn btn-primary">
+        Save
+       </button>
+    <div class="row g-6">
+        <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Doc No</label>
+            <input type="text" name="v_no" class="form-control form-control-sm">
+
+        </div>
+        <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Doc Date/Miti</label>
+          <input type="text" name="v_date" class="form-control form-control-sm">
+        </div>
+        <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Deleivery Date/Miti</label>
+            <input type="text" name="deleivery_date"class="form-control form-control-sm">
+          </div>
+          
+    </div>
+    <hr>
+    <div class="row g-3">
+        <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Dealer</label>
+            <select name="Dealer" id="Dealer"class="form-select form-select-sm" aria-label=".form-select-sm example">
+                <option selected>Select Dealer</option>
+                {% for Dealers in Dealer %}
+                <option value="{{Dealers.DEALER_CODE}}">{{Dealers.DEALER_NAME}}</option>
+                {% endfor %}
+              </select>
+        </div>
+        <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Area</label>
+            <select name="Area"class="form-select form-select-sm" aria-label=".form-select-sm example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+        </div>
+        <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Priority</label>
+            <select name="Priority"class="form-select form-select-sm" aria-label=".form-select-sm example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+          </div>
+      </div>
+      <hr>
+      <div class="row g-3">
+        <div class="col">
+            <label for="formGroupExampleInput" class="form-label">M/s Customer</label>
+            <select name="Customer" id="Customer"class="form-select form-select-sm" aria-label=".form-select-sm example">
+              <option selected>Select Customer</option>
+              {% for Customers in Customer %}
+              <option value="{{Customers.CUS_CODE}}">{{Customers.CUS_NAME}}</option>
+              {% endfor %}
+            </select>
+        </div>
+        <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Shipping Address</label>
+            <select name="Shipping_Address"class="form-select form-select-sm" aria-label=".form-select-sm example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+        </div>
+        <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Sales Class</label>
+            <select name="Sale_Class" id="Sale_Class"class="form-select form-select-sm" aria-label=".form-select-sm example">
+              <option selected>Select Sale Class</option>
+              {% for Sd in Sale_Class %}
+              <option value="{{Sd.SD_TYPE_CODE}}">{{Sd.SD_TYPE_NAME}}</option>
+              {% endfor %}
+            </select>
+          </div>
+      </div>
+      <hr>
+      <div class="row g-3">
+        <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Payment Mode</label>
+            <select name="payment_mode" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+        </div>
+        <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Product Discount</label>
+            <input type="text" name="product_discount"class="form-control form-control-sm">
+        </div>
+        <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Shipping Contact</label>
+            <input type="text" name="Shipping_contact"class="form-control form-control-sm">
+          </div>
+      </div>
+      <div class="col">
+        <label for="formGroupExampleInput" class="form-label">Remarks</label>
+        <input type="text" name="Remarks" class="form-control form-control-sm">
+    </div>
+    <hr>
+    <input type="submit" value="Save" class="btn-info">
+    </form>
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+   Add Product
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+         <form name="add_skills" id="add_skills>
+          
+          <div id="InputsWrapper">
+            <div class="row g-8">
+              <div class="col">
+                <label for="formGroupExampleInput" class="form-label">Product</label>
+                <select name="it" id="it"class="form-select form-select-sm" aria-label=".form-select-sm example">
+                  <option selected>Select Sale Class</option>
+                  {% for icode in it %}
+                  <option value="{{icode.IT_CODE}}">{{icode.IT_NAME}}</option>
+                  {% endfor %}
+                </select>
+            </div>
+                <div class="col">
+                    <label for="formGroupExampleInput" class="form-label">Unit      </label>
+                    <input type="text" class="form-control form-control-sm">
+                </div>
+                <div class="col">
+                    <label for="formGroupExampleInput" class="form-label">Ctn/Bag</label>
+                    <input type="text" class="form-control form-control-sm">
+                  </div>
+                  <div class="col">
+                    <label for="formGroupExampleInput" class="form-label">Quantity</label>
+                    <input type="text" class="form-control form-control-sm">
+                  </div>
+                  <div class="col">
+                    <label for="formGroupExampleInput" class="form-label">Price/Unit</label>
+                    <input type="text" class="form-control form-control-sm">
+                  </div>
+                  <div class="col">
+                    <label for="formGroupExampleInput" class="form-label">Value</label>
+                    <input type="text" class="form-control form-control-sm">
+                  </div>
+                  <div class="col">
+                    <label for="formGroupExampleInput" class="form-label">Net Value</label>
+                    <input type="text" class="form-control form-control-sm">
+                   
+                  </div>
+                  <div class="col">
+                    <label for="formGroupExampleInput" class="form-label">Action</label>
+                    
+                    <button type="button"class="form-control form-control-sm" name="add" id="AddMoreFileBox" class="btn btn-success">Add More</button>
+                  </div>
+                </div>
+                  
+              </div>
+            
+              <div class="container">  
+                <br />  
+                <br />  
+                <h2 align="center">Add product</h2><div id="resultbox"></div>  
+                <div class="form-group">  
+                     <form name="add_skills" id="add_skills">  
+                                    <div id="InputsWrapper">
+                                     
+                                         <div class="col-xs-6"><input type="text" name="skill[]" placeholder="Enter your skill" class="form-control name_list" /></div>
+                                         <div class="col-xs-6"><button type="button" name="add" id="AddMoreFileBox" class="btn btn-success">Add More</button></div>
+           </div>
+          </div>
+          <br/>
+                               <input type="button" name="submit" id="submit" class="btn btn-info" value="Submit" />  
+                     </form>  
+                </div>  
+           </div>
+         </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Add in Grid</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+      
+
+{% endblock content%}
+
